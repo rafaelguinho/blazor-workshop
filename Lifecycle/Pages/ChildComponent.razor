@@ -1,0 +1,40 @@
+﻿<h3>@Title</h3>
+
+@code{
+
+    [Parameter]
+    public string Title { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("OnInitialized");
+    }
+
+    //Before parameters are set
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        Console.WriteLine("SetParameters");
+        await base.SetParametersAsync(parameters);
+    }
+
+    //After parameters are set
+    protected override async Task OnParametersSetAsync()
+    {
+        Console.WriteLine("OnParametersSet");
+    }
+
+    //After component render
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("OnAfterRender");
+    }
+
+    //Suppress UI refreshing
+    protected override bool ShouldRender()
+    {
+        Console.WriteLine("ShouldRender");
+        var renderUI = true;
+
+        return renderUI;
+    }
+}

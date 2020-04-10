@@ -1,0 +1,64 @@
+﻿@page "/"
+@using Forms.Shared
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h1>Starship Database</h1>
+
+<h2>New Ship Entry Form</h2>
+
+<EditForm Model="@_starship" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+
+    <p>
+        <label>
+            Description:
+            <InputText @bind-Value="_starship.Description" />
+        </label>
+        <ValidationMessage For="@(() => _starship.Description)" />
+    </p>
+    <p>
+        <label>
+            Primary Classification:
+            <InputSelect @bind-Value="_starship.Classification">
+                <option value="">Select classification ...</option>
+                <option value="Exploration">Exploration</option>
+                <option value="Diplomacy">Diplomacy</option>
+                <option value="Defense">Defense</option>
+            </InputSelect>
+        </label>
+    </p>
+    <p>
+        <label>
+            Maximum Accommodation:
+            <InputNumber @bind-Value="_starship.MaximumAccommodation" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Engineering Approval:
+            <InputCheckbox @bind-Value="_starship.IsValidatedDesign" />
+        </label>
+    </p>
+    <p>
+        <label>
+            Production Date:
+            <InputDate @bind-Value="_starship.ProductionDate" />
+        </label>
+    </p>
+
+    <button type="submit">Submit</button>
+
+</EditForm>
+
+@code {
+    private Starship _starship = new Starship();
+
+    private async Task HandleValidSubmit()
+    {
+        await Http.PostJsonAsync("api/ship", _starship);
+        NavigationManager.NavigateTo("ships");
+    }
+}

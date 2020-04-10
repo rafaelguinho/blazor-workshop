@@ -1,0 +1,32 @@
+﻿@page "/ships"
+
+@using Forms.Shared
+@inject HttpClient Http
+
+<table class="table">
+
+    <tbody>
+
+
+        @foreach (var ship in _starships)
+        {
+            <tr>
+                <td>@ship.Description</td>
+                <td>@ship.Classification</td>
+                <td>@ship.IsValidatedDesign</td>
+                <td>@ship.MaximumAccommodation</td>
+                <td>@ship.ProductionDate</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@code {
+
+    private List<Starship> _starships = new List<Starship>();
+
+    protected override async Task OnInitializedAsync() =>
+        _starships = await Http.GetJsonAsync<List<Starship>>("api/ship");
+}

@@ -1,0 +1,22 @@
+﻿@page "/ParentComponent"
+
+<h1>Parent Component</h1>
+
+<p>ParentYear: @ParentYear</p>
+
+<br />
+
+<input @bind="ParentYear" @bind:event="oninput" style="width: 50%" />
+
+<br />
+<br />
+
+<ChildComponent Year="ParentYear" />
+
+
+
+@code {
+    [Parameter]
+    public int ParentYear { get; set; } = 1978;
+
+}

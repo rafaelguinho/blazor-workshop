@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<h1>@Message</h1>
+<br />
+
+<label>Default bind</label>
+<input @bind="Message" style="width: 50%" />
+
+@*<input value="@Message"
+       @onchange="@((ChangeEventArgs __e) => Message =
+        __e.Value.ToString())" />*@
+
+<br />
+<br />
+<label>Oninput bind</label>
+<input @bind="Message" @bind:event="oninput" style="width: 50%" />
+
+<br />
+
+@code {
+    private string Message { get; set; }
+}

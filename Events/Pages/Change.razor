@@ -1,0 +1,11 @@
+﻿@page "/change"
+
+<label>Input check</label>
+<input type="checkbox" class="form-check-input" @onchange="CheckChanged" />
+
+@code {
+    private void CheckChanged(ChangeEventArgs args)
+    {
+        Console.WriteLine(args.Value);
+    }
+}
